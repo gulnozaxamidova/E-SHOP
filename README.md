@@ -115,9 +115,9 @@ password: shop
 
 You can send how many PR's do you want, I'll be glad to analyse and accept them! And if you have any question about the project...
 
-📫Email-me: <a href='mailto:rosekhamidova@gmail.com'>fl4viooliveira@gmail.com</a>
+📫Email-me: <a href='mailto:rosekhamidova@gmail.com'>rosekhamidova@gmail.com</a>
 
-;
+
 
 Thank you!
 
