@@ -1,0 +1,107 @@
+{% extends 'layouts/main.html' %}
+{% block content %}
+{% include 'inc/slider.html' %}
+
+    <div class="container my-3">
+        <div class="row ">
+            <div class="col-md-12">
+                <h3>Top Products</h3>
+                <hr>
+                <div class="row owl-carousel owl-theme">
+                    {% for item in trending_products %}
+                    <div class="item product_data">
+                        <div class="card">
+                            <div class="card-body" >
+                                <a href="#" class="text-dark">
+                                    <div class="mb-2" style="height: 200px;">
+                                        <img src="{{item.product_image}}" class="w-100 h-100">
+                                    </div>
+                                    <h5 class="text-center">{{item.name}}</h5>
+                                    <h5 class="text-center">$ {{item.selling_price|stringformat:'d'}}</h5>
+                                </a>
+                                <div class="row mt-2">
+                                    <div class="col-6 mt-1">
+                                        <span>
+                                            {% if item.quantity %}
+                                                <button type="button" class="btn btn-primary btn-sm me-2 mb-2 float-start shadow addtoCartBtn">Add to Cart <i class="fa fa-shopping-cart"></i></button>
+                                            {% else %}
+                                                <button type="button" class="btn btn-danger btn-sm me-2 mb-2 float-start shadow" disabled>Out of Stock</button>
+                                            {% endif %}
+                                        </span>
+                                    </div>
+                                    <div class="col-6">
+                                        <!--------------------------- For ajax -------------------------->
+                                        {% csrf_token %}
+                                        <input type="hidden" value="{{item.quantity}}" class="max_value">
+                                        <input type="hidden" value="{{item.id}}" class="prod_id">
+                                        <!---------------------------------------------------------------->
+                                        <div class="input-group text-center mb-3">
+                                            <button class="input-group-text decrement-btn">-</button>
+                                            <input type="text" name="quantity" class="form-control qty-input text-center" value="1">
+                                            <button class="input-group-text increment-btn">+</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Brands</h3>
+                <hr>
+                <div class="row owl-carousel owl-theme">
+                    {% for item in category %}
+                    <div class="item">
+                        <a href="{% url 'collectionsview' item.slug %}">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="mb-2" style="height: 200px;">
+                                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNtSAfwcqLa-GJQXHlEQlXnux39n8i0ZKVKg&usqp=CAU" class="w-100 h-100">
+                                    </div>
+                                    <h4 class="text-center text-dark">{{item.name}}</h4>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {% include 'inc/footer.html' %}
+
+{% endblock content %} 
+
+{% block scripts %}
+<script>
+    $('.owl-carousel').owlCarousel({
+        loop:true,
+        margin:10,
+        dots:false,
+        nav:true,
+        responsive:{
+            0:{
+                items:1
+            },
+            500:{
+                items:2
+            },
+            992:{
+                items:3
+            },
+            1400:{
+                items:4
+            }
+        }
+    })
+</script>
+{% endblock scripts %}

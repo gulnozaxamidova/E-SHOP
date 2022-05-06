@@ -1,0 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost&family=Roboto&display=swap");
+* {
+  font-family: "Jost", sans-serif;
+  font-family: "Roboto", sans-serif;
+}
+a {
+  text-decoration: none;
+}
+.tag{
+  font-size: 16px;
+  float: right;
+  color: white;
+}
+.active{
+  font-weight: 600;
+}
+.checkoutform label{
+  font-size: 14px;
+  font-weight: 600;
+}
+.checkoutform input{
+  font-size: 14px;
+}
+.product_data .input-group {
+  max-width: 130px; 
+  min-width: 107px;
+}
+.search_bar{
+  width: 40%;
+  min-width: 320px;
+  margin-left: 13%;
+}
+.input-group input,.search_bar input{
+  box-shadow: none!important;
+  border:1px solid #ccc !important;
+}
+footer{
+  height: 50px;
+  background-color: #F5F5F5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.1rem;
+  color: #A2887D;
+}
+.badge{
+  position: relative;
+  bottom: 2px;
+}
+@media screen and (max-width:992px) {
+  .search_bar{
+    margin:auto;
+    margin-top: 10px;
+  }
+}

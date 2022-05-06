@@ -1,0 +1,59 @@
+{% extends 'layouts/main.html' %}
+{% block title %}
+    My Cart
+{% endblock title %}
+{% block content %}
+<div class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow">
+                    <div class="card-header"> 
+                        <h3 class="mb-0 text-center">My Cart</h3>
+                    </div>
+                    <div class="card-body " id="cartdata">
+                        {% if cart %}
+                        <div class="table-responsive">
+                            <table class="table align-middle ">
+                                <tbody>
+                                    {% for item in cart %}
+                                    <tr class="product_data">
+                                        <td class="text-nowrap"><img src="{{item.product.product_image.url}}" class="mh-100" width="70px"></td>
+                                        <td class="text-nowrap"><h6>{{item.product.name}}</h6></td>
+                                        <td class="text-nowrap">$ {{item.product.selling_price| stringformat:'d'}}</td>
+                                        <td class="text-nowrap">
+                                              <!--------------------------------------------------- Ajax ------------------------------------------------->
+                                                <input type="hidden" class="prod_id" value="{{item.product_id}}">
+                                                <input type="hidden" value="{{item.product.quantity}}" class="max_value">
+                                                {% csrf_token %}
+                                              <!---------------------------------------------------------------------------------------------------------->
+                                            {% if item.product.quantity >= item.product_qty %}
+                                            <label for="Quantity">Quantity</label>
+                                            <div class="input-group text-center mb-3" style="width: 125px;">
+                                                <button class="input-group-text changeQuantity decrement-btn">-</button>
+                                                <input type="number" name="quantity" class="form-control qty-input text-center" disabled value="{{item.product_qty}}">
+                                                <button class="input-group-text changeQuantity increment-btn">+</button>
+                                            </div>
+                                            {% else %}
+                                            <h6>Out of stock</h6>
+                                            {% endif %}
+                                        </td>
+                                        <td class="text-nowrap">
+                                            <button class="btn btn-danger delete-cart-item"><i class="fa fa-trash"></i> Remove</i></button>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <a href="{% url 'checkout' %}" class="btn btn-outline-success float-end">Checkout</a>
+                        {% else %}
+                            <h4 class="text-center">Your cart is empty</h4>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
