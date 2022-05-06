@@ -72,7 +72,7 @@
                                     {% for item in cartitems %}
                                         <tr>
                                             <td>
-                                                <img src="{{ item.product.product_image.url }}" class="me-2" height="50px" width="50px">
+                                                <img src="{{ item.product.product_image }}" class="me-2" height="50px" width="50px">
                                                 {{item.product.name}}
                                             </td>
                                             <td>{{item.product_qty}}</td>
